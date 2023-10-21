@@ -33,18 +33,21 @@ public class BankAccountController {
   @PostMapping
   public ResponseEntity<IdResponse> addUgovor(
       @RequestBody final SaveBankAccountRequest saveBankAccountRequest) {
-    return ResponseEntity.status(HttpStatus.OK).body(bankAccountFacade.addBankAccount(saveBankAccountRequest));
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(bankAccountFacade.addBankAccount(saveBankAccountRequest));
   }
 
   @GetMapping("/{bankAccountId}/balance")
   public ResponseEntity<GetBalanceResponse> getBalance(
       @PathVariable final Long bankAccountId) {
-    return ResponseEntity.status(HttpStatus.OK).body(bankAccountFacade.getBalance(bankAccountId));
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(bankAccountFacade.getBalance(bankAccountId));
   }
 
   @GetMapping("/all")
   public ResponseEntity<GenericList<GetBankAccountResponse>> getAllBankAccount() {
-    return ResponseEntity.status(HttpStatus.OK).body(bankAccountFacade.getAllBankAccount());
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(bankAccountFacade.getAllBankAccount());
   }
 
 }

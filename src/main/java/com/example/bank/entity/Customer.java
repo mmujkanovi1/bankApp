@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer extends  AuditingData{
+public class Customer extends AuditingData {
 
   @Id
   @SequenceGenerator(

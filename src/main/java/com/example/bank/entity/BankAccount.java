@@ -10,12 +10,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
+
+import java.math.BigDecimal;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.math.BigDecimal;
 
 @Entity
 @Table(name = "bank_account")
@@ -23,7 +24,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BankAccount extends  AuditingData{
+public class BankAccount extends AuditingData {
 
   @Id
   @SequenceGenerator(
@@ -45,6 +46,7 @@ public class BankAccount extends  AuditingData{
   @JoinColumn(name = "customer", referencedColumnName = "id")
   private Customer customer;
 
+  @Column(name = "balance")
   private BigDecimal balance;
 
 }

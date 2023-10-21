@@ -1,0 +1,15 @@
+server:
+  port: 8091
+
+# H2 in-memory database used for integration tests
+spring:
+  datasource:
+    url: jdbc:h2:mem:test_faktoring_db
+    driverClassName: org.h2.Driver
+    username: username
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  h2:
+    console.enabled: true

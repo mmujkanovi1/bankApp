@@ -27,22 +27,22 @@ public class TransactionController {
   private final TransactionFacade transactionFacade;
 
   @Autowired
-  public TransactionController(TransactionFacade transactionFacade) {
+  public TransactionController(final TransactionFacade transactionFacade) {
     this.transactionFacade = transactionFacade;
   }
 
   @PostMapping
   public ResponseEntity<IdResponse> makeTransaction(
       @RequestBody final SaveTransactionRequest saveTransactionRequest) {
-    return ResponseEntity.status(HttpStatus.OK).body(transactionFacade.makeTransaction(saveTransactionRequest));
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(transactionFacade.makeTransaction(saveTransactionRequest));
   }
 
   @GetMapping("/{bankAccountId}/history")
   public ResponseEntity<GenericList<GetTransactionResponse>> getTransactionHistory(
       @PathVariable final Long bankAccountId) {
-    return ResponseEntity.status(HttpStatus.OK).body(transactionFacade.getTransactionHistory(bankAccountId));
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(transactionFacade.getTransactionHistory(bankAccountId));
   }
-
-
 
 }

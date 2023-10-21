@@ -22,7 +22,7 @@ public class CustomerServiceImpl implements CustomerService {
   @Override
   public IdResponse addCustomer(SaveCustomerRequest saveCustomerRequest) {
     Customer customer = CustomerMapper.INSTANCE.saveCustomerRequestToCustomer(
-          saveCustomerRequest
+        saveCustomerRequest
     );
     Long savedCustomerId = customerRepository.save(customer).getId();
     return new IdResponse(savedCustomerId);

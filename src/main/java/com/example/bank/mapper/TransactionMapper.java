@@ -19,7 +19,8 @@ public interface TransactionMapper {
   @Mapping(target = "toAccount", source = "toAccount")
   @Mapping(target = "createdAt", ignore = true)
   @Mapping(target = "id", ignore = true)
-  Transaction saveTransactionRequestToTransaction(SaveTransactionRequest saveTransactionRequest, BankAccount fromAccount, BankAccount toAccount);
+  Transaction saveTransactionRequestToTransaction(SaveTransactionRequest saveTransactionRequest, BankAccount fromAccount,
+      BankAccount toAccount);
 
   @Mapping(target = "fromAccountId", source = "fromAccount.id")
   @Mapping(target = "fromAccountName", source = "fromAccount.name")

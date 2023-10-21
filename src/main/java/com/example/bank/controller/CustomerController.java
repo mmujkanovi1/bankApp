@@ -30,9 +30,10 @@ public class CustomerController {
   }
 
   @PostMapping
-  public ResponseEntity<IdResponse> addUgovor(
+  public ResponseEntity<IdResponse> addCustomer(
       @RequestBody final SaveCustomerRequest saveCustomerRequest) {
-    return ResponseEntity.status(HttpStatus.OK).body(customerFacade.addCustomer(saveCustomerRequest));
+    return ResponseEntity.status(HttpStatus.OK)
+        .body(customerFacade.addCustomer(saveCustomerRequest));
   }
 
 }

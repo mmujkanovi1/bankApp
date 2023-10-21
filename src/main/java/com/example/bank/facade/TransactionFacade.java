@@ -19,7 +19,7 @@ public class TransactionFacade {
   }
 
   public IdResponse makeTransaction(SaveTransactionRequest saveTransactionRequest) {
-  return transactionService.makeTransaction(saveTransactionRequest);
+    return transactionService.makeTransaction(saveTransactionRequest);
   }
 
   public GenericList<GetTransactionResponse> getTransactionHistory(Long bankAccountId) {

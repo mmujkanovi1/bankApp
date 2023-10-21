@@ -5,7 +5,6 @@ import com.example.bank.entity.BankAccount;
 import com.example.bank.entity.Transaction;
 import com.example.bank.exception.BusinessRuleException;
 import com.example.bank.exception.InvalidInputException;
-import com.example.bank.exception.ResourceNotFoundException;
 import com.example.bank.mapper.TransactionMapper;
 import com.example.bank.repository.BankAccountRepository;
 import com.example.bank.repository.TransactionRepository;
@@ -45,15 +44,25 @@ public class TransactionServiceImpl implements TransactionService {
   public IdResponse makeTransaction(SaveTransactionRequest saveTransactionRequest) {
     Map<String, List<String>> invalidInputValidationErrors =
         getInvalidInputValidationErrors(
-        saveTransactionRequest.getFromAccountId(),
-        saveTransactionRequest.getToAccountId(),
-        saveTransactionRequest.getAmount()
+            saveTransactionRequest.getFromAccountId(),
+            saveTransactionRequest.getToAccountId(),
+            saveTransactionRequest.getAmount()
         );
     if (!invalidInputValidationErrors.isEmpty()) {
       throw new InvalidInputException(Constants.INVALID_INPUT, invalidInputValidationErrors);
     }
-    BankAccount fromAccount = globalService.getResourceById(bankAccountRepository, saveTransactionRequest.getFromAccountId(), "bank account");
-    BankAccount toAccount = globalService.getResourceById(bankAccountRepository, saveTransactionRequest.getToAccountId(), "bank account");
+    BankAccount fromAccount =
+        globalService.getResourceById(
+            bankAccountRepository,
+            saveTransactionRequest.getFromAccountId(),
+            "Bank account"
+        );
+    BankAccount toAccount =
+        globalService.getResourceById(
+            bankAccountRepository,
+            saveTransactionRequest.getToAccountId(),
+            "Bank account"
+        );
 
     Map<String, List<String>> businessRuleValidationErrors =
         getBusinessRuleValidationErrors(
@@ -64,14 +73,25 @@ public class TransactionServiceImpl implements TransactionService {
       throw new BusinessRuleException(Constants.INVALID_INPUT, businessRuleValidationErrors);
     }
 
-    Transaction transaction = TransactionMapper.INSTANCE.saveTransactionRequestToTransaction(saveTransactionRequest,
-        fromAccount,
-        toAccount);
+    Transaction transaction = TransactionMapper.INSTANCE
+        .saveTransactionRequestToTransaction(
+            saveTransactionRequest,
+            fromAccount,
+            toAccount
+        );
 
-    fromAccount.setBalance(fromAccount.getBalance().subtract(saveTransactionRequest.getAmount()));
+    fromAccount.setBalance(
+        fromAccount.getBalance().subtract(
+            saveTransactionRequest.getAmount()
+        )
+    );
     bankAccountRepository.save(fromAccount);
 
-    toAccount.setBalance(toAccount.getBalance().add(saveTransactionRequest.getAmount()));
+    toAccount.setBalance(
+        toAccount.getBalance().add(
+            saveTransactionRequest.getAmount()
+        )
+    );
     bankAccountRepository.save(toAccount);
 
     Long savedTransactionId = transactionRepository.save(transaction).getId();
@@ -80,8 +100,14 @@ public class TransactionServiceImpl implements TransactionService {
 
   @Override
   public GenericList<GetTransactionResponse> getTransactionHistory(Long bankAccountId) {
-    List<Transaction> transactionList = transactionRepository.findByFromAccountIdOrToAccountId(bankAccountId, bankAccountId);
-    List<GetTransactionResponse> transactionResponseList = TransactionMapper.INSTANCE.transactionListToGetTransactionResponseList(transactionList);
+    List<Transaction> transactionList =
+        transactionRepository.findByFromAccountIdOrToAccountId(
+            bankAccountId,
+            bankAccountId
+        );
+    List<GetTransactionResponse> transactionResponseList =
+        TransactionMapper.INSTANCE
+            .transactionListToGetTransactionResponseList(transactionList);
 
     return new GenericList<>(transactionResponseList);
   }
@@ -91,27 +117,41 @@ public class TransactionServiceImpl implements TransactionService {
       BigDecimal amount) {
     Map<String, List<String>> invalidInputValidationErrors = new HashMap<>();
     if (fromAccount == null) {
-      invalidInputValidationErrors.computeIfAbsent(TRANSACTION_CREATE, (k) -> new ArrayList<>()).add(Constants.FROM_ACCOUNT_NULL_VALIDATION_ERROR);
+      invalidInputValidationErrors.computeIfAbsent(
+          TRANSACTION_CREATE,
+          (k) -> new ArrayList<>()
+      ).add(Constants.FROM_ACCOUNT_NULL_VALIDATION_ERROR);
     }
     if (toAccount == null) {
-      invalidInputValidationErrors.computeIfAbsent(TRANSACTION_CREATE, (k) -> new ArrayList<>()).add(Constants.TO_ACCOUNT_NULL_VALIDATION_ERROR);
+      invalidInputValidationErrors.computeIfAbsent(
+          TRANSACTION_CREATE,
+          (k) -> new ArrayList<>()
+      ).add(Constants.TO_ACCOUNT_NULL_VALIDATION_ERROR);
     }
     if (amount == null) {
-      invalidInputValidationErrors.computeIfAbsent(TRANSACTION_CREATE, (k) -> new ArrayList<>()).add(Constants.AMOUNT_NULL_VALIDATION_ERROR);
+      invalidInputValidationErrors.computeIfAbsent(
+          TRANSACTION_CREATE,
+          (k) -> new ArrayList<>()
+      ).add(Constants.AMOUNT_NULL_VALIDATION_ERROR);
     }
     return invalidInputValidationErrors;
   }
 
   private Map<String, List<String>> getBusinessRuleValidationErrors(BigDecimal amount,
-      BigDecimal fromAccountBalance){
+      BigDecimal fromAccountBalance) {
     Map<String, List<String>> businessRuleValidationErrors = new HashMap<>();
-   if(amount.compareTo(BigDecimal.ZERO) < 0) {
-     businessRuleValidationErrors.computeIfAbsent(TRANSACTION_CREATE, (k) -> new ArrayList<>()).add(Constants.AMOUNT_LESS_THEN_ZERO);
-   }
-   else if(amount.compareTo(fromAccountBalance) > 0) {
-     businessRuleValidationErrors.computeIfAbsent(TRANSACTION_CREATE, (k) -> new ArrayList<>()).add(Constants.AMOUNT_GREATER_THEN_BALANCE);
-   }
-   return businessRuleValidationErrors;
-}
+    if (amount.compareTo(BigDecimal.ZERO) < 0) {
+      businessRuleValidationErrors.computeIfAbsent(
+          TRANSACTION_CREATE,
+          (k) -> new ArrayList<>()
+      ).add(Constants.AMOUNT_LESS_THEN_ZERO);
+    } else if (amount.compareTo(fromAccountBalance) > 0) {
+      businessRuleValidationErrors.computeIfAbsent(
+          TRANSACTION_CREATE,
+          (k) -> new ArrayList<>()
+      ).add(Constants.AMOUNT_GREATER_THEN_BALANCE);
+    }
+    return businessRuleValidationErrors;
+  }
 
 }
