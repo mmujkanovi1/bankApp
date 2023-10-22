@@ -21,5 +21,4 @@ public interface BankAccountMapper {
   @Mapping(target = "createdAt", ignore = true)
   BankAccount saveBankAccountRequestToBankAccount(SaveBankAccountRequest saveBankAccountRequest, Customer customer);
 
-  List<GetBankAccountResponse> bankAccountListToGetBankAccountResponseList(List<BankAccount> bankAccountList);
 }

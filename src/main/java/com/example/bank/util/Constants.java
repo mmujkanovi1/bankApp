@@ -12,4 +12,8 @@ public final class Constants {
   public static final String AMOUNT_LESS_THEN_ZERO = "Wrong input, amount cannot be less then zero";
   public static final String AMOUNT_GREATER_THEN_BALANCE = "Transaction amount can't be greater then bank account balance";
 
+  public static final String BALANCE_NULL_VALIDATION_ERROR = "Wrong input, balance cannot be null";
+  public static final String CUSTOMER_ID_NULL_VALIDATION_ERROR = "Wrong input, customer id cannot be null";
+  public static final String ACCOUNT_NAME_NULL_VALIDATION_ERROR = "Wrong input, bank account name cannot be null";
+  public static final String BALANCE_LESS_THEN_ZERO = "Wrong input, balance cannot be less then zero";
 }

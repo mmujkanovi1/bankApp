@@ -31,7 +31,7 @@ public class BankAccountController {
   }
 
   @PostMapping
-  public ResponseEntity<IdResponse> addUgovor(
+  public ResponseEntity<IdResponse> addBankAccount(
       @RequestBody final SaveBankAccountRequest saveBankAccountRequest) {
     return ResponseEntity.status(HttpStatus.OK)
         .body(bankAccountFacade.addBankAccount(saveBankAccountRequest));
@@ -42,12 +42,6 @@ public class BankAccountController {
       @PathVariable final Long bankAccountId) {
     return ResponseEntity.status(HttpStatus.OK)
         .body(bankAccountFacade.getBalance(bankAccountId));
-  }
-
-  @GetMapping("/all")
-  public ResponseEntity<GenericList<GetBankAccountResponse>> getAllBankAccount() {
-    return ResponseEntity.status(HttpStatus.OK)
-        .body(bankAccountFacade.getAllBankAccount());
   }
 
 }

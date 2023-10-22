@@ -29,7 +29,4 @@ public class BankAccountFacade {
     return bankAccountService.getBalance(bankAccountId);
   }
 
-  public GenericList<GetBankAccountResponse> getAllBankAccount() {
-    return bankAccountService.getAllBankAccount();
-  }
 }
