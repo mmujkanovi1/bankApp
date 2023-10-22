@@ -38,12 +38,14 @@ Once you start the application, the customer table will consist of the following
     * username: "postgres"
     * password: "postgres"
 ### How to install and run application? ###
-1. Download jar file from the repository
+1. Clone the project and build it with the Gradle build tool in order to create a jar file (usually in the build directory).
 2. Open cmd as administrator
 3. Type: 
 ```bash
 java -jar /path/to/jar/file.jar
 ```
+
+You can also run it from intellij idea if you have it installed on your local machine with a "Run" button press!
 
 #### How to run application on dev enviroment? ####
 * Type in cmd: 
