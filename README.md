@@ -9,8 +9,29 @@ different customers.
 * Retrieve transfer history for a given account
 * And additionaly, create customer route, for testing purposes!
 
-. You can also run it in dev, prod and test environment. When the application is started in test environment, integration tests that use h2 memory database are run. With JaCoCo we secured that the application fails when code coverage is less than 85% on package level.
+You can also run it in dev, prod and test environment. When the application is started in test environment, integration tests that use h2 memory database are run. With JaCoCo we secured that the application fails when code coverage is less than 85% on package level.
 
+Once you start the application, the customer table will consist of the following lines:  
+```bash
+[
+ {
+ "id": 1,
+ "name": "Arisha Barron"
+ },
+ {
+ "id": 2,
+ "name": "Branden Gibson"
+ },
+ {
+ "id": 3,
+ "name": "Rhonda Church"
+ },
+ {
+ "id": 4,
+ "name": "Georgina Hazel"
+ }
+]
+```
 ### Requirements! ###
 * Installed java 17 on your machine.
 * Installed PostgresSQL on your machine and created database with name “bankDB” on port “5432” with credentials:
