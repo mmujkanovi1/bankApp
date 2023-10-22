@@ -1,5 +1,6 @@
 package com.example.bank.mapper;
 
+import com.example.bank.annotation.IgnoreCommonDataMapping;
 import com.example.bank.entity.BankAccount;
 import com.example.bank.entity.Transaction;
 import com.example.bank.request.SaveTransactionRequest;
@@ -17,8 +18,7 @@ public interface TransactionMapper {
 
   @Mapping(target = "fromAccount", source = "fromAccount")
   @Mapping(target = "toAccount", source = "toAccount")
-  @Mapping(target = "createdAt", ignore = true)
-  @Mapping(target = "id", ignore = true)
+  @IgnoreCommonDataMapping
   Transaction saveTransactionRequestToTransaction(SaveTransactionRequest saveTransactionRequest, BankAccount fromAccount,
       BankAccount toAccount);
 

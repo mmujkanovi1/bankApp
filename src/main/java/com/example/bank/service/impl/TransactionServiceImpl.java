@@ -101,7 +101,7 @@ public class TransactionServiceImpl implements TransactionService {
   @Override
   public GenericList<GetTransactionResponse> getTransactionHistory(Long bankAccountId) {
     List<Transaction> transactionList =
-        transactionRepository.findByFromAccountIdOrToAccountId(
+        transactionRepository.findByFromAccountIdOrToAccountIdOrderById(
             bankAccountId,
             bankAccountId
         );

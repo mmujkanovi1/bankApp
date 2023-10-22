@@ -1,5 +1,6 @@
 package com.example.bank.mapper;
 
+import com.example.bank.annotation.IgnoreCommonDataMapping;
 import com.example.bank.entity.Customer;
 import com.example.bank.request.SaveCustomerRequest;
 import org.mapstruct.Mapper;
@@ -11,7 +12,6 @@ public interface CustomerMapper {
 
   CustomerMapper INSTANCE = Mappers.getMapper(CustomerMapper.class);
 
-  @Mapping(target = "id", ignore = true)
-  @Mapping(target = "createdAt", ignore = true)
+  @IgnoreCommonDataMapping
   Customer saveCustomerRequestToCustomer(SaveCustomerRequest saveCustomerRequest);
 }

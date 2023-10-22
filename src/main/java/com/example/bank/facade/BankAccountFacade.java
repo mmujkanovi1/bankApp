@@ -1,15 +1,11 @@
 package com.example.bank.facade;
 
-import com.example.bank.dto.GenericList;
 import com.example.bank.request.SaveBankAccountRequest;
 import com.example.bank.response.GetBalanceResponse;
-import com.example.bank.response.GetBankAccountResponse;
 import com.example.bank.response.IdResponse;
 import com.example.bank.service.BankAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.awt.geom.GeneralPath;
 
 @Service
 public class BankAccountFacade {

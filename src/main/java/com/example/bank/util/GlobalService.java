@@ -9,7 +9,7 @@ public class GlobalService {
 
   public <T, ID> T getResourceById(final JpaRepository<T, ID> jpaRepository, ID id, final String resourceName) {
     return jpaRepository.findById(id).orElseThrow(() -> {
-      throw new ResourceNotFoundException(resourceName + " with id = " + id + "does not exis!");
+      throw new ResourceNotFoundException(resourceName + " with id = " + id + " does not exis!");
     });
   }
 

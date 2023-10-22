@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface TransactionRepository extends JpaRepository<Transaction, Long> {
 
-  List<Transaction> findByFromAccountIdOrToAccountId(Long fromAccountId, Long toAccountId);
+  List<Transaction> findByFromAccountIdOrToAccountIdOrderById(Long fromAccountId, Long toAccountId);
 
 }

@@ -9,7 +9,7 @@ different customers.
 * Retrieve transfer history for a given account
 * And additionaly, create customer route, for testing purposes!
 
-You can also run it in dev, prod and test environment. When the application is started in test environment, integration tests that use h2 memory database are run. With JaCoCo we secured that the application fails when code coverage is less than 85% on package level.
+You can also run it in dev, prod and test environment. When the application is started in test environment, integration tests that use h2 memory database are run.
 
 Once you start the application, the customer table will consist of the following lines:  
 ```bash

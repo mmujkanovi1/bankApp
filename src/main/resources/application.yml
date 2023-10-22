@@ -3,7 +3,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     username: postgres
     url: jdbc:postgresql://localhost:5432/bankDB
-    password: mirza29031999
+    password: postgres
     jpa:
       show-sql: true
 
@@ -21,9 +21,6 @@ spring:
       jadira:
         usertype:
           autoRegisterUserTypes: true
-
-  profiles:
-    active: dev, fast
 
   application:
     name: bankApplication
