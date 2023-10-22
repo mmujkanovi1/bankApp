@@ -6,6 +6,10 @@ public final class Constants {
 
   public static final String INVALID_INPUT = "Invalid input";
 
+  public static final String TRANSACTION_CREATE = "createTransaction";
+  public static final String CUSTOMER_CREATE = "createCustomer";
+  public static final String BANK_ACCOUNT_CREATE = "createBankAccount";
+
   public static final String FROM_ACCOUNT_NULL_VALIDATION_ERROR = "Wrong input, from account cannot be null";
   public static final String TO_ACCOUNT_NULL_VALIDATION_ERROR = "Wrong input, to account cannot be null";
   public static final String AMOUNT_NULL_VALIDATION_ERROR = "Wrong input, amount cannot be null";

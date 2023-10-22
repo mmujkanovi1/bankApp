@@ -19,8 +19,6 @@ import java.util.Map;
 @Service
 public class CustomerServiceImpl implements CustomerService {
 
-  private static final String CUSTOMER_CREATE = "createCustomer";
-
   private final CustomerRepository customerRepository;
 
   @Autowired
@@ -48,7 +46,7 @@ public class CustomerServiceImpl implements CustomerService {
     Map<String, List<String>> invalidInputValidationErrors = new HashMap<>();
     if (name == null) {
       invalidInputValidationErrors.computeIfAbsent(
-          CUSTOMER_CREATE,
+          Constants.CUSTOMER_CREATE,
           (k) -> new ArrayList<>()
       ).add(Constants.CUSTOMER_NAME_NULL_VALIDATION_ERROR);
     }

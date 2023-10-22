@@ -26,8 +26,6 @@ import java.util.Map;
 @Service
 public class TransactionServiceImpl implements TransactionService {
 
-  private static final String TRANSACTION_CREATE = "createTransaction";
-
   private final TransactionRepository transactionRepository;
   private final BankAccountRepository bankAccountRepository;
   private final GlobalService globalService;
@@ -118,19 +116,19 @@ public class TransactionServiceImpl implements TransactionService {
     Map<String, List<String>> invalidInputValidationErrors = new HashMap<>();
     if (fromAccount == null) {
       invalidInputValidationErrors.computeIfAbsent(
-          TRANSACTION_CREATE,
+          Constants.TRANSACTION_CREATE,
           (k) -> new ArrayList<>()
       ).add(Constants.FROM_ACCOUNT_NULL_VALIDATION_ERROR);
     }
     if (toAccount == null) {
       invalidInputValidationErrors.computeIfAbsent(
-          TRANSACTION_CREATE,
+          Constants.TRANSACTION_CREATE,
           (k) -> new ArrayList<>()
       ).add(Constants.TO_ACCOUNT_NULL_VALIDATION_ERROR);
     }
     if (amount == null) {
       invalidInputValidationErrors.computeIfAbsent(
-          TRANSACTION_CREATE,
+          Constants.TRANSACTION_CREATE,
           (k) -> new ArrayList<>()
       ).add(Constants.AMOUNT_NULL_VALIDATION_ERROR);
     }
@@ -142,12 +140,12 @@ public class TransactionServiceImpl implements TransactionService {
     Map<String, List<String>> businessRuleValidationErrors = new HashMap<>();
     if (amount.compareTo(BigDecimal.ZERO) < 0) {
       businessRuleValidationErrors.computeIfAbsent(
-          TRANSACTION_CREATE,
+          Constants.TRANSACTION_CREATE,
           (k) -> new ArrayList<>()
       ).add(Constants.AMOUNT_LESS_THEN_ZERO);
     } else if (amount.compareTo(fromAccountBalance) > 0) {
       businessRuleValidationErrors.computeIfAbsent(
-          TRANSACTION_CREATE,
+          Constants.TRANSACTION_CREATE,
           (k) -> new ArrayList<>()
       ).add(Constants.AMOUNT_GREATER_THEN_BALANCE);
     }

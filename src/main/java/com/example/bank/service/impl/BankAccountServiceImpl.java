@@ -25,8 +25,6 @@ import java.util.Map;
 @Service
 public class BankAccountServiceImpl implements BankAccountService {
 
-  private static final String BANK_ACCOUNT_CREATE = "createBankAccount";
-
   private final BankAccountRepository bankAccountRepository;
   private final CustomerRepository customerRepository;
   private final GlobalService globalService;
@@ -82,19 +80,19 @@ public class BankAccountServiceImpl implements BankAccountService {
     Map<String, List<String>> invalidInputValidationErrors = new HashMap<>();
     if (balance == null) {
       invalidInputValidationErrors.computeIfAbsent(
-          BANK_ACCOUNT_CREATE,
+          Constants.BANK_ACCOUNT_CREATE,
           (k) -> new ArrayList<>()
       ).add(Constants.BALANCE_NULL_VALIDATION_ERROR);
     }
     if (customerId == null) {
       invalidInputValidationErrors.computeIfAbsent(
-          BANK_ACCOUNT_CREATE,
+          Constants.BANK_ACCOUNT_CREATE,
           (k) -> new ArrayList<>()
       ).add(Constants.CUSTOMER_ID_NULL_VALIDATION_ERROR);
     }
     if (name == null) {
       invalidInputValidationErrors.computeIfAbsent(
-          BANK_ACCOUNT_CREATE,
+          Constants.BANK_ACCOUNT_CREATE,
           (k) -> new ArrayList<>()
       ).add(Constants.ACCOUNT_NAME_NULL_VALIDATION_ERROR);
     }
@@ -105,7 +103,7 @@ public class BankAccountServiceImpl implements BankAccountService {
     Map<String, List<String>> businessRuleValidationErrors = new HashMap<>();
     if (balance.compareTo(BigDecimal.ZERO) < 0) {
       businessRuleValidationErrors.computeIfAbsent(
-          BANK_ACCOUNT_CREATE,
+          Constants.BANK_ACCOUNT_CREATE,
           (k) -> new ArrayList<>()
       ).add(Constants.BALANCE_LESS_THEN_ZERO);
     }
