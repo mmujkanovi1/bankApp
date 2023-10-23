@@ -64,6 +64,8 @@ public class TransactionServiceImpl implements TransactionService {
 
     Map<String, List<String>> businessRuleValidationErrors =
         getBusinessRuleValidationErrors(
+            saveTransactionRequest.getFromAccountId(),
+            saveTransactionRequest.getToAccountId(),
             saveTransactionRequest.getAmount(),
             fromAccount.getBalance()
         );
@@ -135,7 +137,9 @@ public class TransactionServiceImpl implements TransactionService {
     return invalidInputValidationErrors;
   }
 
-  private Map<String, List<String>> getBusinessRuleValidationErrors(BigDecimal amount,
+  private Map<String, List<String>> getBusinessRuleValidationErrors(Long fromAccountId,
+      Long toAccountId,
+      BigDecimal amount,
       BigDecimal fromAccountBalance) {
     Map<String, List<String>> businessRuleValidationErrors = new HashMap<>();
     if (amount.compareTo(BigDecimal.ZERO) < 0) {
@@ -148,6 +152,12 @@ public class TransactionServiceImpl implements TransactionService {
           Constants.TRANSACTION_CREATE,
           (k) -> new ArrayList<>()
       ).add(Constants.AMOUNT_GREATER_THEN_BALANCE);
+    }
+    if (fromAccountId.equals(toAccountId)) {
+      businessRuleValidationErrors.computeIfAbsent(
+          Constants.TRANSACTION_CREATE,
+          (k) -> new ArrayList<>()
+      ).add(Constants.FROM_ACCOUNT_TO_ACCOUNT_THE_SAME);
     }
     return businessRuleValidationErrors;
   }
