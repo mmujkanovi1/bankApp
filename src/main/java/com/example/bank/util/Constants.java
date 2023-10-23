@@ -23,4 +23,7 @@ public final class Constants {
   public static final String BALANCE_LESS_THEN_ZERO = "Wrong input, balance cannot be less then zero";
 
   public static final String CUSTOMER_NAME_NULL_VALIDATION_ERROR = "Wrong input, customer name cannot be null";
+
+  public static final String BANK_ACCOUNT_STRING = "Bank account";
+  public static final String CUSTOMER_STRING = "Customer";
 }

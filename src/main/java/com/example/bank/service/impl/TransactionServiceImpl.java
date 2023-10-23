@@ -53,13 +53,13 @@ public class TransactionServiceImpl implements TransactionService {
         globalService.getResourceById(
             bankAccountRepository,
             saveTransactionRequest.getFromAccountId(),
-            "Bank account"
+            Constants.BANK_ACCOUNT_STRING
         );
     BankAccount toAccount =
         globalService.getResourceById(
             bankAccountRepository,
             saveTransactionRequest.getToAccountId(),
-            "Bank account"
+            Constants.BANK_ACCOUNT_STRING
         );
 
     Map<String, List<String>> businessRuleValidationErrors =

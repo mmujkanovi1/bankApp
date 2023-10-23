@@ -62,7 +62,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         globalService.getResourceById(
             customerRepository,
             saveBankAccountRequest.getCustomerId(),
-            "Customer"
+            Constants.CUSTOMER_STRING
         );
     BankAccount bankAccount =
         BankAccountMapper.INSTANCE.saveBankAccountRequestToBankAccount(
@@ -116,7 +116,7 @@ public class BankAccountServiceImpl implements BankAccountService {
         globalService.getResourceById(
             bankAccountRepository,
             bankAccountId,
-            "Bank account"
+            Constants.BANK_ACCOUNT_STRING
         );
     return new GetBalanceResponse(bankAccount.getBalance());
   }
